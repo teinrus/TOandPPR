@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Добавить задачу</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="task-form">
+        <h1>Добавить задачу</h1>
+        <form method="post" action="{{ url_for('add_task') }}">
+            <label for="title">Название:</label>
+            <input type="text" id="title" name="title" class="task-input"><br><br>
+            
+            <label for="description">Описание:</label>
+            <textarea id="description" name="description" class="task-input"></textarea><br><br>
+            
+            <label for="due_date">Дата выполнения:</label>
+            <input type="date" id="due_date" name="due_date" class="task-input"><br><br>
+            
+            <label for="smena">Номер смены:</label>
+            <select id="smena" name="smena" class="task-input">
+                <option value="1">Смена 1</option>
+                <option value="2">Смена 2</option>
+                <option value="3">Смена 3</option>
+            </select><br><br>
+            
+            <label for="status">Статус:</label>
+            <select id="status" name="status" class="task-input">
+                <option value="0">Незавершенная</option>
+                <option value="1">Завершенная</option>
+            </select><br><br>
+            
+            <input type="submit" value="Добавить" class="task-button">
+        </form>
+        <br>
+        <a href="{{ url_for('task_list') }}" class="task-link">Назад к списку задач</a>
+    </div>
+</body>
+</html>

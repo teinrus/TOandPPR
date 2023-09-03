@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Детали задачи</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="task-form">
+        <h1 class="task-details">Детали задачи</h1>
+        <h2 class="task-details">{{ task[1] }}</h2>
+        <p class="task-paragraph">{{ task[2] }}</p>
+        
+        <p><strong>Дата выполнения:</strong> {{ task[8] }}</p>
+        <p><strong>Номер смены:</strong> Смена {{ task[7] }}</p>
+    </div>
+    
+    <form class="task-form" method="post" action="{{ url_for('edit_comment', task_id=task[0]) }}">
+        <label for="comment">Комментарий:</label>
+        <textarea id="comment" name="comment">{{ task[6] }}</textarea><br>
+        <input type="submit" value="Сохранить комментарий">
+    </form>
+
+    <form class="task-form" method="post" action="{{ url_for('upload_images', task_id=task[0]) }}" enctype="multipart/form-data">
+        <label for="images">Загрузить изображения:</label>
+        <input type="file" id="images" name="images" multiple><br>
+        <input class="task-button" type="submit" value="Загрузить изображения">
+    </form>
+    
+    
+    {% for image in task_images %}
+    <img class="task-image" src="{{ url_for('uploaded_image', filename=image[2]) }}" alt="Изображение">
+    {% endfor %}
+    
+    <form method="post" action="{{ url_for('change_task_status', task_id=task[0]) }}">
+        <label for="new_status">Изменить статус:</label>
+        <select id="new_status" name="new_status">
+            <option value="0" {% if task[3] == 0 %}selected{% endif %}>Не принято</option>
+            <option value="1" {% if task[3] == 1 %}selected{% endif %}>Принято</option>
+            <option value="2" {% if task[3] == 2 %}selected{% endif %}>Выполнено</option>
+        </select>
+        <input type="submit" value="Сохранить">
+    </form>
+    
+    <script>
+        function uploadImages() {
+            var input = document.getElementById('images');
+            var files = input.files;
+            var formData = new FormData();
+
+            for (var i = 0; i < files.length; i++) {
+                formData.append('images', files[i]);
+            }
+
+            formData.append('task_id', {{ task[0] }});  // Добавляем ID задачи
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', "{{ url_for('task_detail', task_id=task[0]) }}", true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    alert('Изображения загружены.');
+                    location.reload();
+                }
+            };
+
+            xhr.send(formData);
+        }
+    </script>
+    
+    <br>
+    
+    <a class="task-button" href="{{ url_for('edit_task', task_id=task[0]) }}">Редактировать</a>
+    <a class="task-button" href="{{ url_for('task_list') }}">Назад к списку задач</a>
+</body>
+</html>

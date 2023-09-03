@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Добавить пользователя</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Добавить пользователя</h1>
+        <form method="post">
+            <label for="username">Имя пользователя:</label>
+            <input type="text" id="username" name="username"><br><br>
+            
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password"><br><br>
+            
+            <label for="user_group">Группа:</label>
+            <input type="text" id="user_group" name="user_group"><br><br>
+            
+            <input type="submit" value="Добавить" class="task-button">
+        </form>
+        <br>
+        <a class="task-button" href="{{ url_for('user_list') }}">Назад к списку пользователей</a>
+    </div>
+</body>
+</html>

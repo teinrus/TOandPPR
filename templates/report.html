@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Отчет</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Отчет</h1>
+        
+        <form method="post" action="{{ url_for('report') }}">
+            <label for="start_date">Дата начала:</label>
+            <input type="date" id="start_date" name="start_date" required value="{{ request.form.get('start_date') }}"><br><br>
+            
+            <label for="end_date">Дата окончания:</label>
+            <input type="date" id="end_date" name="end_date" required value="{{ request.form.get('end_date') }}"><br><br>
+            
+            <label for="smena">Смена:</label>
+            <select id="smena" name="smena">
+                <option value="1" {% if request.form.get('smena') == '1' %} selected {% endif %}>Смена 1</option>
+                <option value="2" {% if request.form.get('smena') == '2' %} selected {% endif %}>Смена 2</option>
+                <option value="3" {% if request.form.get('smena') == '3' %} selected {% endif %}>Смена 3</option>
+            </select><br><br>
+            
+            <input type="submit" value="Сформировать отчет">
+        </form>
+        
+
+        
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Статус</th>
+                <th>Дата создания</th>
+                <th>Дата обновления</th>
+                <th>Комментарий</th>
+                <th>Смена</th>
+                <th>Планируемая дата выполнения</th>
+                <th>Фото</th>
+                <th>Редактировать</th>
+                
+            </tr>
+            {% for task in report_tasks %}
+            <tr>
+                <td>{{ task[0] }}</td>
+                <td>{{ task[1] }}</td>
+                <td>{{ task[2] }}</td>
+                <td>{{ task[3] }}</td>
+                <td>{{ task[4] }}</td>
+                <td>{{ task[5] }}</td>
+                <td>{{ task[6] }}</td>
+                <td>{{ task[7] }}</td>
+                <td>{{ task[8] }}</td>
+                <td>
+                    <td>
+                        <ul>
+                            {% for image in task_images[task[0]] %}
+                                <li><img src="{{ url_for('uploaded_image', filename=image) }}" alt="Изображение" class="img-200x200"></li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    
+                    
+
+                </td>
+                <td><a href="{{ url_for('edit_task', task_id=task[0]) }}">Редактировать</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+            
+            <a class="task-button" href="{{ url_for('task_list') }}">Вернуться к списку задач</a>
+        </div>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Редактирование комментария</title>
+</head>
+<body>
+    <h1>Редактирование комментария</h1>
+    <form method="post" action="{{ url_for('edit_comment', task_id=task[0]) }}">
+        <label for="comment">Изменить комментарий:</label>
+        <textarea id="comment" name="comment">{{ task[6] }}</textarea><br><br>
+        <input type="submit" value="Сохранить комментарий">
+    </form>
+    <br>
+    <a href="{{ url_for('task_detail', task_id=task[0]) }}">Отмена</a>
+</body>
+</html>

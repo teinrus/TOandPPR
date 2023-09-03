@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Список пользователей</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Список пользователей</h1>
+        <table class="user-table">
+            <tr>
+                <th>ID</th>
+                <th>Имя пользователя</th>
+                <th>Группа</th>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>{{ user[0] }}</td>
+                <td>{{ user[1] }}</td>
+                <td>{{ user[3] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a class="task-button" href="{{ url_for('add_user') }}">Добавить пользователя</a>
+        <a class="task-button" href="{{ url_for('task_list') }}">Назад к списку задач</a>
+    </div>
+</body>
+</html>

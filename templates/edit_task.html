@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Редактировать задачу</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="task-form">
+        <h1>Редактировать задачу</h1>
+        <form method="post" action="{{ url_for('edit_task', task_id=task[0]) }}" enctype="multipart/form-data">
+            <label for="title">Название:</label>
+            <input type="text" id="title" name="title" class="task-input" value="{{ task[1] }}"><br><br>
+            
+            <label for="description">Описание:</label>
+            <textarea id="description" name="description" class="task-input">{{ task[2] }}</textarea><br><br>
+            
+            <label for="status">Статус:</label>
+            <select id="status" name="status" class="task-input">
+                <option value="0" {% if task[3] == 0 %}selected{% endif %}>Не принято</option>
+                <option value="1" {% if task[3] == 1 %}selected{% endif %}>Принято</option>
+                <option value="2" {% if task[3] == 2 %}selected{% endif %}>Выполнено</option>
+            </select><br><br>
+            
+            <label for="due_date">Планируемая дата выполнения:</label>
+            <input type="date" id="due_date" name="due_date" class="task-input" value="{{ task_due_date }}"><br><br>
+
+            <label for="smena">Номер смены:</label>
+            <select id="smena" name="smena" class="task-input">
+                <option value="1" {% if task[7] == 1 %}selected{% endif %}>Смена 1</option>
+                <option value="2" {% if task[7] == 2 %}selected{% endif %}>Смена 2</option>
+                <option value="3" {% if task[7] == 3 %}selected{% endif %}>Смена 3</option>
+            </select><br><br>
+            
+            <label for="comment">Комментарий:</label>
+            <textarea id="comment" name="comment" class="task-input">{{ task[6] }}</textarea><br><br>
+            
+            <label for="images">Загрузить изображения:</label>
+            <input type="file" id="images" name="images" multiple><br><br>
+            
+            <!-- Скрытое поле для передачи действия -->
+            <input type="hidden" name="action" value="update_images">
+            
+            <!-- Список изображений с флажками для удаления -->
+            <fieldset>
+                <legend>Изображения:</legend>
+                {% for image in task_images %}
+                    <input type="checkbox" name="delete_images" value="{{ image[0] }}"> <img class="task-image" src="{{ url_for('uploaded_image', filename=image[2]) }}" alt="Изображение"><br>
+                {% endfor %}
+            </fieldset>
+            
+            <input type="submit" value="Сохранить" class="task-button">
+            <input type="submit" name="action" value="Удалить изображения" class="task-button">
+        </form>
+        <br>
+        <a href="{{ url_for('task_list') }}" class="task-link">Назад к списку задач</a>
+    </div>
+</body>
+</html>

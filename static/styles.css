@@ -1,0 +1,128 @@
+/* Общие стили для всех страниц */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+/* Стили для страницы списка задач */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+/* Стили для формы и элементов на странице деталей задачи */
+.task-form {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+#comment, #images {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.task-button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.task-button:hover {
+    background-color: #0056b3;
+}
+
+.task-image {
+    max-width: 300px;
+    height: 300px;
+    margin: 15px 0;
+}
+
+.task-link {
+    display: inline-block;
+    margin-right: 15px;
+    color: #007bff;
+    transition: color 0.2s ease-in-out;
+}
+
+.task-link:hover {
+    color: #0056b3;
+}
+
+
+.task-input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #929292fd;
+    border-radius: 5px;
+    resize: vertical;
+    overflow: auto;
+}
+
+
+.task-description {
+    height: 150px; /* Устанавливаем начальную высоту */
+}
+
+.task-details {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.task-paragraph {
+    width: 100%;
+    word-wrap: break-word;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Стили для кнопок входа и выхода в верхнем правом углу */
+.login-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.login-button:hover {
+    background-color: #0056b3;
+}
+.task-image {
+    max-width: 200px;
+    max-height: 200px;
+}
+.img-200x200 {
+    width: 200px;
+    height: 200px;
+}
